@@ -30,12 +30,16 @@ export async function createTaskAction(
 
   const { title, description, dueDate } = parsed.data;
 
-  await createTask(
-    userId,
-    title,
-    description ?? undefined,
-    dueDate ? new Date(dueDate) : undefined
-  );
+  try {
+    await createTask(
+      userId,
+      title,
+      description ?? undefined,
+      dueDate ? new Date(dueDate) : undefined
+    );
+  } catch {
+    return { error: "Failed to create task. Please try again." };
+  }
 
   revalidatePath("/");
   return {};
@@ -63,13 +67,17 @@ export async function editTaskAction(
 
   const { id, title, description, dueDate } = parsed.data;
 
-  await updateTaskDetails(
-    id,
-    userId,
-    title,
-    description ?? null,
-    dueDate ? new Date(dueDate) : null
-  );
+  try {
+    await updateTaskDetails(
+      id,
+      userId,
+      title,
+      description ?? null,
+      dueDate ? new Date(dueDate) : null
+    );
+  } catch {
+    return { error: "Failed to update task. Please try again." };
+  }
 
   revalidatePath("/");
   return {};
@@ -89,7 +97,11 @@ export async function toggleTaskAction(
     return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
-  await switchTaskStatus(parsed.data.id, userId);
+  try {
+    await switchTaskStatus(parsed.data.id, userId);
+  } catch {
+    return { error: "Failed to update task. Please try again." };
+  }
 
   revalidatePath("/");
   return {};
@@ -112,7 +124,11 @@ export async function deleteTaskAction(
     return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
-  await deleteTask(parsed.data.id, userId);
+  try {
+    await deleteTask(parsed.data.id, userId);
+  } catch {
+    return { error: "Failed to delete task. Please try again." };
+  }
 
   revalidatePath("/");
   return {};
