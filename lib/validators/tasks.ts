@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 // Schema for creating a new task
 export const createTaskSchema = z.object({
-  title: z.string().min(1, "Title is required"),
+  title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
   dueDate: z
     .string()
@@ -10,7 +10,7 @@ export const createTaskSchema = z.object({
       if (!val) return true;
       const date = new Date(val);
       return date > new Date();
-    }, "Due date must be in the future")
+    }, 'Due date must be in the future')
     .nullable()
     .optional(),
 });
@@ -18,7 +18,7 @@ export const createTaskSchema = z.object({
 // Schema for updating an existing task
 export const updateTaskSchema = z.object({
   id: z.string().uuid(),
-  title: z.string().min(1, "Title is required"),
+  title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
   dueDate: z.string().nullable().optional(), // ISO string or null
   completed: z.boolean(),
@@ -27,7 +27,7 @@ export const updateTaskSchema = z.object({
 // Schema for editing a task's details (title, description, due date)
 export const editTaskDetailsSchema = z.object({
   id: z.string().uuid(),
-  title: z.string().min(1, "Title is required"),
+  title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
   dueDate: z.string().nullable().optional(), // ISO string or null
 });

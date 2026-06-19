@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState, useTransition } from "react";
-import { editTaskAction } from "@/actions/tasks";
-import { Button } from "@/components/ui/button";
+import { useState, useTransition } from 'react';
+import { editTaskAction } from '@/actions/tasks';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -11,10 +11,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 
 type EditTaskDialogProps = {
   task: {
@@ -27,9 +27,9 @@ type EditTaskDialogProps = {
 
 // Convert a Date (or ISO string) into the yyyy-mm-dd format an <input type="date"> expects.
 function toDateInputValue(value: Date | string | null) {
-  if (!value) return "";
+  if (!value) return '';
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "";
+  if (Number.isNaN(date.getTime())) return '';
   return date.toISOString().slice(0, 10);
 }
 
@@ -59,7 +59,7 @@ export function EditTaskDialog({ task }: EditTaskDialogProps) {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant='outline' size='sm'>
           Update
         </Button>
       </DialogTrigger>
@@ -72,54 +72,43 @@ export function EditTaskDialog({ task }: EditTaskDialogProps) {
             </DialogDescription>
           </DialogHeader>
 
-          <input type="hidden" name="id" value={task.id} />
+          <input type='hidden' name='id' value={task.id} />
 
-          <div className="flex flex-col gap-4 py-4">
-            <div className="flex flex-col gap-2">
+          <div className='flex flex-col gap-4 py-4'>
+            <div className='flex flex-col gap-2'>
               <Label htmlFor={`title-${task.id}`}>Title</Label>
-              <Input
-                id={`title-${task.id}`}
-                name="title"
-                defaultValue={task.title}
-                required
-              />
+              <Input id={`title-${task.id}`} name='title' defaultValue={task.title} required />
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className='flex flex-col gap-2'>
               <Label htmlFor={`description-${task.id}`}>Description</Label>
               <Textarea
                 id={`description-${task.id}`}
-                name="description"
-                defaultValue={task.description ?? ""}
+                name='description'
+                defaultValue={task.description ?? ''}
                 rows={3}
               />
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className='flex flex-col gap-2'>
               <Label htmlFor={`dueDate-${task.id}`}>Due date</Label>
               <Input
                 id={`dueDate-${task.id}`}
-                name="dueDate"
-                type="date"
+                name='dueDate'
+                type='date'
                 defaultValue={toDateInputValue(task.dueDate)}
               />
             </div>
 
-            {error ? (
-              <p className="text-sm text-destructive">{error}</p>
-            ) : null}
+            {error ? <p className='text-sm text-destructive'>{error}</p> : null}
           </div>
 
           <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
+            <Button type='button' variant='outline' onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit" disabled={pending}>
-              {pending ? "Saving…" : "Save changes"}
+            <Button type='submit' disabled={pending}>
+              {pending ? 'Saving…' : 'Save changes'}
             </Button>
           </DialogFooter>
         </form>

@@ -1,15 +1,15 @@
-import type { Config } from "jest";
+import type { Config } from 'jest';
 
 const config: Config = {
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transform: {
-    "^.+\\.(ts|tsx|js|jsx)$": "babel-jest",
+    '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
   },
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/$1",
+    '^@/(.*)$': '<rootDir>/$1',
   },
-  testMatch: ["<rootDir>/tests/**/*.test.{ts,tsx}"],
+  testMatch: ['<rootDir>/tests/**/*.test.{ts,tsx}'],
 };
 
 export default config;

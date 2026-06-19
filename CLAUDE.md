@@ -17,14 +17,17 @@ TaskFlow is a task management app built on **Next.js 16** (App Router) with **Re
 - `npm run lint` — run ESLint (flat config in `eslint.config.mjs`)
 
 Drizzle (no npm script wrappers — invoke `drizzle-kit` directly):
+
 - `npx drizzle-kit generate` — generate SQL migrations from `db/schema.ts` into `./drizzle`
 - `npx drizzle-kit push` — push the schema straight to the database
 - `npx drizzle-kit studio` — open Drizzle Studio
 
 shadcn UI:
+
 - `npx shadcn@latest add [component]` — add components into `components/ui/`
 
 Tests use **Jest** with **React Testing Library**:
+
 - `npm test` — run all tests
 - `npm run test:watch` — run in watch mode
 
@@ -37,10 +40,12 @@ Config files: `jest.config.ts`, `jest.setup.ts`, `babel.config.js`. Tests live i
 ## Architecture
 
 **Authentication (Clerk).** Auth is wired in two places:
+
 - `app/layout.tsx` wraps the app in `<ClerkProvider>`.
 - `proxy.ts` (Next.js 16's renamed middleware file — not `middleware.ts`) runs `clerkMiddleware`. **Every route is protected by default**; only routes matched by `isPublicRoute` (currently `/landing(.*)`) are public. New public pages must be added to that matcher in `proxy.ts`.
 
 **Data layer (Drizzle + Neon).** The flow is `db/schema.ts` → `lib/queries/*` → callers.
+
 - `db/schema.ts` defines tables (the `tasks` table: uuid PK, `userId`, title, description, dueDate, completed, timestamps).
 - `db/index.ts` exports a single `db` client via `drizzle-orm/neon-http`.
 - `lib/queries/tasks.ts` holds all task data access as plain async functions. **Every query is scoped by `userId`** (the Clerk user id) — preserve this pattern so users only ever touch their own rows.

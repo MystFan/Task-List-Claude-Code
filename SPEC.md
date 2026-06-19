@@ -8,11 +8,11 @@ The Task Management Application is a multi-user task tracking system that enable
 
 ### Objectives
 
-* Provide secure user-specific task management.
-* Enforce strict data ownership and authorization.
-* Maintain strong type safety across the application.
-* Deliver a responsive and accessible user experience.
-* Enable future extensibility with minimal architectural changes.
+- Provide secure user-specific task management.
+- Enforce strict data ownership and authorization.
+- Maintain strong type safety across the application.
+- Deliver a responsive and accessible user experience.
+- Enable future extensibility with minimal architectural changes.
 
 ---
 
@@ -130,11 +130,11 @@ components/
 
 ### Responsibilities
 
-* Render user interface.
-* Display task information.
-* Collect user input.
-* Trigger server actions.
-* Show loading and error states.
+- Render user interface.
+- Display task information.
+- Collect user input.
+- Trigger server actions.
+- Show loading and error states.
 
 ### Components
 
@@ -142,9 +142,9 @@ components/
 
 Displays:
 
-* Task list
-* Task statistics
-* Create task functionality
+- Task list
+- Task statistics
+- Create task functionality
 
 #### Dialog Components
 
@@ -167,20 +167,20 @@ actions/tasks.ts
 
 ### Responsibilities
 
-* Receive requests from UI.
-* Validate user authentication.
-* Validate input data.
-* Execute database operations.
-* Handle errors.
-* Revalidate cache.
+- Receive requests from UI.
+- Validate user authentication.
+- Validate input data.
+- Execute database operations.
+- Handle errors.
+- Revalidate cache.
 
 ### Available Actions
 
 ```typescript
-createTask()
-updateTask()
-deleteTask()
-toggleTaskCompletion()
+createTask();
+updateTask();
+deleteTask();
+toggleTaskCompletion();
 ```
 
 ### Workflow
@@ -215,9 +215,9 @@ Zod
 
 ### Responsibilities
 
-* Validate incoming data.
-* Enforce schema constraints.
-* Provide typed inputs.
+- Validate incoming data.
+- Enforce schema constraints.
+- Provide typed inputs.
 
 ### Example Schema
 
@@ -231,9 +231,9 @@ const createTaskSchema = z.object({
 
 ### Benefits
 
-* Runtime validation.
-* Type inference.
-* Consistent validation rules.
+- Runtime validation.
+- Type inference.
+- Consistent validation rules.
 
 ---
 
@@ -247,23 +247,21 @@ lib/queries/tasks.ts
 
 ### Responsibilities
 
-* Encapsulate database logic.
-* Apply ownership filters.
-* Return typed results.
+- Encapsulate database logic.
+- Apply ownership filters.
+- Return typed results.
 
 ### Example Query
 
 ```typescript
-db.select()
-  .from(tasks)
-  .where(eq(tasks.userId, userId));
+db.select().from(tasks).where(eq(tasks.userId, userId));
 ```
 
 ### Benefits
 
-* Centralized database access.
-* Improved maintainability.
-* Easier testing.
+- Centralized database access.
+- Improved maintainability.
+- Easier testing.
 
 ---
 
@@ -281,9 +279,9 @@ db/
 
 Responsible for:
 
-* Database connection
-* Drizzle configuration
-* Neon client initialization
+- Database connection
+- Drizzle configuration
+- Neon client initialization
 
 #### schema.ts
 
@@ -320,19 +318,14 @@ Every task operation requires ownership verification.
 Example:
 
 ```typescript
-where(
-  and(
-    eq(tasks.id, taskId),
-    eq(tasks.userId, userId)
-  )
-)
+where(and(eq(tasks.id, taskId), eq(tasks.userId, userId)));
 ```
 
 ### Security Principles
 
-* No client-side authorization.
-* Ownership enforced on every query.
-* User isolation guaranteed by database filtering.
+- No client-side authorization.
+- Ownership enforced on every query.
+- User isolation guaranteed by database filtering.
 
 ---
 
@@ -387,26 +380,26 @@ All incoming data is validated before processing.
 
 Mitigated through:
 
-* Clerk authentication
-* Ownership checks
+- Clerk authentication
+- Ownership checks
 
 ### Invalid Input
 
 Mitigated through:
 
-* Zod validation
+- Zod validation
 
 ### Data Leakage
 
 Mitigated through:
 
-* User-scoped queries
+- User-scoped queries
 
 ### Direct Object Reference Attacks
 
 Mitigated through:
 
-* Ownership verification on every mutation
+- Ownership verification on every mutation
 
 ---
 
@@ -476,9 +469,9 @@ Database Delete
 
 ## Test Environment
 
-* Jest 30
-* React Testing Library
-* jsdom
+- Jest 30
+- React Testing Library
+- jsdom
 
 ## Configuration Files
 
@@ -486,24 +479,24 @@ Database Delete
 
 Responsible for:
 
-* Environment setup
-* Module aliases
-* Test discovery
+- Environment setup
+- Module aliases
+- Test discovery
 
 ### jest.setup.ts
 
 Responsible for:
 
 ```typescript
-import "@testing-library/jest-dom";
+import '@testing-library/jest-dom';
 ```
 
 ### babel.config.js
 
 Responsible for:
 
-* TypeScript transformation
-* JSX transformation
+- TypeScript transformation
+- JSX transformation
 
 ---
 
@@ -529,15 +522,15 @@ render(Page);
 External dependencies are mocked:
 
 ```typescript
-jest.mock("@clerk/nextjs/server");
-jest.mock("@/lib/queries/tasks");
+jest.mock('@clerk/nextjs/server');
+jest.mock('@/lib/queries/tasks');
 ```
 
 ### Benefits
 
-* Isolated unit tests.
-* Fast execution.
-* Predictable behavior.
+- Isolated unit tests.
+- Fast execution.
+- Predictable behavior.
 
 ---
 
@@ -560,10 +553,10 @@ ON tasks(due_date);
 
 ## Application
 
-* Server Components reduce client bundle size.
-* Server Actions eliminate API boilerplate.
-* Database queries are user-scoped.
-* Cache revalidation ensures fresh data.
+- Server Components reduce client bundle size.
+- Server Actions eliminate API boilerplate.
+- Database queries are user-scoped.
+- Cache revalidation ensures fresh data.
 
 ---
 
@@ -597,22 +590,22 @@ Organization
 
 ### Task Attachments
 
-* File uploads
-* Document storage
+- File uploads
+- Document storage
 
 ### Notifications
 
-* Due date reminders
-* Email notifications
+- Due date reminders
+- Email notifications
 
 ### Audit Logging
 
 Track:
 
-* Creation events
-* Updates
-* Deletions
-* Completion history
+- Creation events
+- Updates
+- Deletions
+- Completion history
 
 ---
 
